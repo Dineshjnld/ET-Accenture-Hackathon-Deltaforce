@@ -1,0 +1,62 @@
+services:
+  db:
+    image: pgvector/pgvector:pg17
+    container_name: regulens-pg
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-regulens}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-regulens}
+      POSTGRES_DB: ${POSTGRES_DB:-regulens}
+    ports:
+      - "${POSTGRES_PORT:-55432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-regulens} -d ${POSTGRES_DB:-regulens}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+
+  backend:
+    build:
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: regulens-backend
+    restart: unless-stopped
+    depends_on:
+      db:
+        condition: service_healthy
+    environment:
+      DATABASE_URL: postgresql+psycopg://${POSTGRES_USER:-regulens}:${POSTGRES_PASSWORD:-regulens}@db:5432/${POSTGRES_DB:-regulens}
+      ENVIRONMENT: ${ENVIRONMENT:-production}
+      CORS_ORIGINS: '["http://localhost:8080", "http://localhost:5173"]'
+      DETERMINISTIC_MODE: "true"
+      GEMINI_ENABLED: "false"
+      CEREBRAS_ENABLED: "false"
+      JWT_SECRET: ${JWT_SECRET:-change-me-in-production}
+    ports:
+      - "${BACKEND_PORT:-8000}:8000"
+    volumes:
+      - ./data/uploads:/data/uploads
+      - ./data/samples:/data/samples:ro
+    healthcheck:
+      test: ["CMD", "curl", "-fsS", "http://127.0.0.1:8000/api/v1/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 60s
+
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: regulens-frontend
+    restart: unless-stopped
+    depends_on:
+      - backend
+    ports:
+      - "${FRONTEND_PORT:-8080}:80"
+
+volumes:
+  pgdata:

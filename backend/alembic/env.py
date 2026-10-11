@@ -1,0 +1,73 @@
+"""Alembic environment: migrations for PostgreSQL (pgvector optional) and SQLite.
+
+The ``PortableVector`` column renders as ``VECTOR(n)`` on PostgreSQL when the
+``vector`` extension is available, otherwise as ``TEXT`` — so the same
+migration history applies to both dialects.
+"""
+from __future__ import annotations
+
+import os
+import sys
+from logging.config import fileConfig
+from pathlib import Path
+
+from alembic import context
+from sqlalchemy import engine_from_config, pool
+
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+
+config = context.config
+if config.config_file_name is not None:
+    fileConfig(config.config_file_name)
+
+from app.config import get_settings  # noqa: E402
+
+settings = get_settings()
+config.set_main_option("sqlalchemy.url", os.environ.get("DATABASE_URL", settings.DATABASE_URL))
+
+import app.models  # noqa: F401,E402
+from app.db import Base  # noqa: E402
+
+target_metadata = Base.metadata
+
+
+def include_object(obj, name, type_, reflected, compare_to):
+    # pgvector extension state is managed at runtime, not via migrations.
+    return True
+
+
+def run_migrations_offline() -> None:
+    context.configure(
+        url=config.get_main_option("sqlalchemy.url"),
+        target_metadata=target_metadata,
+        literal_binds=True,
+        dialect_opts={"paramstyle": "named"},
+        include_object=include_object,
+        compare_type=True,
+    )
+    with context.begin_transaction():
+        context.run_migrations()
+
+
+def run_migrations_online() -> None:
+    connectable = engine_from_config(
+        config.get_section(config.config_ini_section, {}),
+        prefix="sqlalchemy.",
+        poolclass=pool.NullPool,
+        future=True,
+    )
+    with connectable.connect() as connection:
+        context.configure(
+            connection=connection,
+            target_metadata=target_metadata,
+            include_object=include_object,
+            compare_type=True,
+        )
+        with context.begin_transaction():
+            context.run_migrations()
+
+
+if context.is_offline_mode():
+    run_migrations_offline()
+else:
+    run_migrations_online()

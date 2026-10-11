@@ -1,0 +1,51 @@
+SYNTHETIC SAMPLE — NOT A REAL RBI REQUIREMENT — FOR DEMO USE ONLY
+=====================================================================
+Fictional Internal Policy: Customer Grievance Redressal & Internal
+Ombudsman Operations Manual v3.0 — Demo Metro Bank (fictional)
+Effective: 2025-04-01 | Owner: Head of Customer Service
+=====================================================================
+
+1. Purpose
+This fictional policy describes how Demo Metro Bank (a fictional scheduled
+commercial bank with 120 banking outlets in India) operates its Internal
+Ombudsman (IO) office. It is a SAMPLE for software demonstration and does not
+create any legal obligation.
+
+2. IO Appointment (Control CTL-IO-APPOINT)
+The bank shall appoint at least one Internal Ombudsman. The Customer Service
+Committee of the Board shall review the IO strength at least once a year.
+Owner: Head of Customer Service. Frequency: annual review. Expected evidence:
+Board CSC minutes and IO appointment letter. Testing: inspect the latest CSC
+minutes and the appointment file.
+
+3. Vacancy Reporting (Control CTL-IO-VACANCY)
+The bank shall inform the Reserve Bank of India within 10 working days from
+the date of any IO vacancy caused by resignation, incapacitation, illness or
+death. Owner: Compliance Officer. Frequency: event-driven. Expected evidence:
+RBI intimation letter with dispatch proof. Testing: trace a sample of vacancy
+events to dispatch records.
+
+4. Complaint Escalation (Control CTL-IO-ESCALATE)
+All complaints rejected or only partly redressed by the internal grievance
+machinery shall be escalated to the Internal Ombudsman before the customer is
+informed of the final decision. Owner: Grievance Redressal Officer. Frequency:
+ongoing. Expected evidence: escalation register with IO remarks. Testing:
+re-perform a sample of 25 escalated complaints.
+
+5. Record Retention (Control CTL-IO-RECORDS)
+The bank shall retain IO-related records for at least 5 years from the date
+of final disposal of the complaint. Owner: Operations Head. Frequency: ongoing.
+Expected evidence: records retention log. Testing: inspect retention log.
+
+6. Quarterly Reporting to the Board (Control CTL-IO-BOARDREP)
+The IO office shall submit a quarterly report to the Customer Service
+Committee of the Board covering complaints reviewed, decisions upheld or
+rejected, and systemic issues observed. Owner: Internal Ombudsman Office.
+Frequency: quarterly. Expected evidence: quarterly IO report acknowledged by
+the CSC. Testing: inspect the last two quarterly reports.
+
+7. Known incompleteness (intentional, for demo)
+Control CTL-IO-TRAINING (staff awareness training on IO scheme) exists by name
+only: no documented objective, activity, owner or frequency is defined in this
+sample, and no evidence exists. This intentional gap lets the demo show a
+genuine design gap and missing evidence.

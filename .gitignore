@@ -1,0 +1,62 @@
+# ReguLens AI — never commit secrets, keys, credentials, or local state.
+# The live `.env` (with real GEMINI/CEREBRAS keys) MUST stay local-only.
+
+# --- Secrets & environment files (all variants, any folder) ---
+.env
+.env.*
+**/.env
+**/.env.*
+!*.example
+*.pem
+*.key
+*credentials*.json
+*service-account*.json
+secrets*.json
+
+# --- Credentials / spend ledgers with local usage data ---
+**/.cerebras_usage.json
+
+# --- Python ---
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.pytest_tmp/
+.test_tmp/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+dist/
+build/
+htmlcov/
+.coverage
+coverage.xml
+*.log
+
+# --- Node / frontend ---
+node_modules/
+frontend/dist/
+frontend/coverage/
+.vite/
+*.tsbuildinfo
+
+# --- Uploads, derived artefacts & local databases ---
+# (data/samples/ is demo data and IS committed; everything below is local)
+data/uploads/
+!data/uploads/.gitkeep
+*.db
+*.db-journal
+*.sqlite*
+*.sqlite-journal
+
+# --- OS / editors / misc ---
+.DS_Store
+Desktop.ini
+Thumbs.db
+.vscode/
+.idea/
+.vs/
+*.swp
+*~
+.ipynb_checkpoints/

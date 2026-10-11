@@ -1,0 +1,47 @@
+{
+  "version": "1.0.0",
+  "note": "Hand-labelled evaluation set for ReguLens AI deterministic engines. Sentences 1-12 are adapted from the public RBI Internal Ombudsman directions (paraphrased); the remainder are synthetic edge cases. Labels were assigned by the developer reading the engine's documented rules, then frozen before measurement.",
+  "extraction_sentences": [
+    {"id": "EX-01", "sentence": "Every bank shall appoint at least one IO.", "is_obligation": true, "actor": "Bank", "has_deadline": false},
+    {"id": "EX-02", "sentence": "The bank shall inform the Reserve Bank of India within 10 working days from the date of vacancy.", "is_obligation": true, "actor": "Bank", "has_deadline": true},
+    {"id": "EX-03", "sentence": "\"Deficiency in service\" means a shortcoming in any service the bank provides.", "is_obligation": false},
+    {"id": "EX-04", "sentence": "Chapter II", "is_obligation": false},
+    {"id": "EX-05", "sentence": "The Customer Service Committee of the Board shall determine, at least once in every year, the required IO strength.", "is_obligation": true, "actor": "Customer Service Committee", "has_deadline": true},
+    {"id": "EX-06", "sentence": "These Directions shall be applicable to Commercial Banks having 10 or more banking outlets in India.", "is_obligation": true, "actor": "Bank", "has_deadline": false},
+    {"id": "EX-07", "sentence": "The bank should review complaint trends periodically for systemic issues.", "is_obligation": true, "actor": "Bank", "has_deadline": false},
+    {"id": "EX-08", "sentence": "Nothing in these Directions shall affect the jurisdiction of the courts.", "is_obligation": false},
+    {"id": "EX-09", "sentence": "The IO shall submit a quarterly report within 15 days of the end of each quarter.", "is_obligation": true, "actor": "Internal Ombudsman", "has_deadline": true},
+    {"id": "EX-10", "sentence": "Banks may publish additional customer education material on their websites.", "is_obligation": false},
+    {"id": "EX-11", "sentence": "The bank shall retain IO-related records for at least 5 years from final disposal.", "is_obligation": true, "actor": "Bank", "has_deadline": false},
+    {"id": "EX-12", "sentence": "For the avoidance of doubt, the 2023 Directions stand superseded for commercial banks.", "is_obligation": false},
+    {"id": "EX-13", "sentence": "All rejected complaints shall be escalated to the Internal Ombudsman before final communication.", "is_obligation": true, "actor": "Internal Ombudsman", "has_deadline": false},
+    {"id": "EX-14", "sentence": "The mechanism shall be reviewed at least once in every year for effectiveness.", "is_obligation": true, "actor": null, "has_deadline": false}
+  ],
+  "mapping_pairs": [
+    {"id": "MAP-01", "obligation": "Every bank shall appoint at least one IO.", "control": "Appoint at least one Internal Ombudsman and have the CSC review IO strength at least once a year.", "valid": true},
+    {"id": "MAP-02", "obligation": "The bank shall inform RBI within 10 working days of any IO vacancy.", "control": "On any IO vacancy inform RBI within 10 working days with dispatch proof.", "valid": true},
+    {"id": "MAP-03", "obligation": "All rejected complaints shall be escalated to the Internal Ombudsman.", "control": "Escalate every rejected complaint to the IO before final communication.", "valid": true},
+    {"id": "MAP-04", "obligation": "Every bank shall appoint at least one IO.", "control": "Retain IO-related records for at least 5 years from final disposal.", "valid": false},
+    {"id": "MAP-05", "obligation": "The bank shall retain IO records for five years.", "control": "Re-perform a sample of 25 escalated complaints every quarter.", "valid": false},
+    {"id": "MAP-06", "obligation": "The IO shall submit a quarterly systemic report to the Board committee.", "control": "Submit a quarterly IO report to the CSC covering reviews and systemic issues.", "valid": true},
+    {"id": "MAP-07", "obligation": "The bank shall inform RBI within 10 working days of any IO vacancy.", "control": "Conduct staff awareness training on the IO scheme.", "valid": false},
+    {"id": "MAP-08", "obligation": "The bank shall publish the number of complaints reviewed by the IO in its annual report.", "control": "Publish the annual report with audited financial statements.", "valid": false}
+  ],
+  "evidence_cases": [
+    {"id": "EV-01", "period_end_days_ago": 10, "review_status": "approved", "test_result": null, "expected": "insufficient", "note": "Fresh and approved but untested: presence alone does not establish operation (conservative by design)."},
+    {"id": "EV-02", "period_end_days_ago": 400, "review_status": "approved", "test_result": null, "expected": "stale"},
+    {"id": "EV-03", "period_end_days_ago": 5, "review_status": "pending", "test_result": null, "expected": "not_reviewed"},
+    {"id": "EV-04", "period_end_days_ago": 5, "review_status": "approved", "test_result": "fail", "expected": "insufficient"},
+    {"id": "EV-05", "period_end_days_ago": 5, "review_status": "approved", "test_result": "inconclusive", "expected": "inconclusive"},
+    {"id": "EV-06", "period_end_days_ago": 200, "review_status": "pending", "test_result": null, "expected": "stale"}
+  ],
+  "change_cases": [
+    {"id": "CH-01", "left": "The bank shall inform RBI within 10 working days.", "right": "The bank shall inform RBI within 5 working days.", "expected_type": "deadline_change"},
+    {"id": "CH-02", "left": "Applicable to banks having 10 or more outlets.", "right": "Applicable to banks having 20 or more outlets.", "expected_type": "threshold_change"},
+    {"id": "CH-03", "left": "The bank shall appoint an officer.", "right": "The bank shall appoint an officer.", "expected_type": null}
+  ],
+  "contradiction_cases": [
+    {"id": "CX-01", "obligation": "The bank shall retain IO records for at least 5 years.", "policy_title": "IO records retention", "policy_text": "The bank shall not retain IO records beyond 2 years; destroy after 2 years.", "expect_finding": true},
+    {"id": "CX-02", "obligation": "Every bank shall appoint at least one IO.", "policy_title": "Unrelated travel policy", "policy_text": "Employees shall book travel 7 days in advance.", "expect_finding": false}
+  ]
+}

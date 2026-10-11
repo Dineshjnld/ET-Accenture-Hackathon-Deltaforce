@@ -1,0 +1,32 @@
+SYNTHETIC SAMPLE — SIMULATED AMENDMENT — NOT A REAL RBI NOTIFICATION
+=====================================================================
+Simulated Amendment to RBI (Commercial Banks - Internal Ombudsman)
+Directions, 2026 — for software demonstration only. This file is fictional
+and must never be presented as an official requirement.
+=====================================================================
+
+Chapter II — Office of the Internal Ombudsman (simulated changes)
+
+5. Appointment of Internal Ombudsman
+(1) The IO shall either be a retired or serving officer, in the rank
+equivalent to a General Manager in the regulated entity. The bank shall
+complete the appointment process within 60 days of a vacancy arising.
+
+6. Vacancy reporting (AMENDED — simulated)
+In case of any vacancy in the office of the IO / Deputy IO due to reasons
+such as resignation, incapacitation, illness, death, etc., the bank shall
+inform the Reserve Bank of India within 5 working days from the date of such
+vacancy (reduced from 10 working days) and shall appoint a new IO / Deputy IO
+as per eligibility within 60 days.
+
+7. Number of Internal Ombudsman / Deputy Internal Ombudsman
+(1) Every bank shall appoint at least one IO.
+(2) The Customer Service Committee of the Board of the bank shall determine,
+at least once in every six months, whether additional IO capacity is required
+(changed from once a year in this simulation).
+
+8. Quarterly systemic-issue reporting (NEW — simulated)
+(1) The IO shall submit a quarterly report on systemic issues to the Customer
+Service Committee of the Board within 15 days of the end of each quarter.
+(2) The bank shall publish the number of complaints reviewed by the IO in its
+annual report.
